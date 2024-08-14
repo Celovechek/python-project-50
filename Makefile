@@ -17,7 +17,7 @@ package-reinstall: #переустановка пакета
 	python3 -m pip install --user --force-reinstall dist/*.whl
 
 lint: #провера линтера
-	poetry run flake8 brain_games
+	poetry run flake8 gendiff
 
 gendiff:
 	poetry run gendiff
