@@ -18,3 +18,6 @@ package-reinstall: #переустановка пакета
 
 lint: #провера линтера
 	poetry run flake8 brain_games
+
+gendiff:
+	poetry run gendiff
