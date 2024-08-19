@@ -13,5 +13,5 @@ def test_json():
 }''') # normal work
     assert type(generate_diff('file1.json', 'file2.json')) == str #string type
     assert (': False\n' not in generate_diff('file1.json', 'file2.json') or
-            ': True\n' not in generate_diff('file1.json', 'file2.json')) #check true/false style
+            ': True\n' not in generate_diff('file1.json', 'file2.json')) #check true/false styling
 
