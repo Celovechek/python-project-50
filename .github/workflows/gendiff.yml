@@ -27,11 +27,23 @@ jobs:
           make lint
           pip install pytest
           poetry run pytest
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
-        if: github.ref_name == 'main'
+#      - name: Test & publish code coverage
+#        uses: paambaati/codeclimate-action@v5.0.0
+#        if: github.ref_name == 'main'
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+#        with:
+#          coverageCommand: make test-coverage
+#          debug: true
+
+      - name: Run tests
+        run: |
+          pip install coverage codeclimate-test-reporter
+          coverage run -m pytest
+
+      - name: Report coverage to Code Climate
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+        run: |
+          coverage xml
+          codeclimate-test-reporter after-build --exit-code $?
