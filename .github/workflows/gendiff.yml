@@ -35,7 +35,7 @@ jobs:
 #        with:
 #          coverageCommand: make test-coverage
 #          debug: true
-
+#
       - name: Run tests
         run: |
           pip install coverage codeclimate-test-reporter
@@ -43,7 +43,7 @@ jobs:
 
       - name: Report coverage to Code Climate
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           coverage xml
           codeclimate-test-reporter after-build --exit-code $?
