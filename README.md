@@ -7,5 +7,8 @@
 ## Badge codeclimate
 [![Maintainability](https://api.codeclimate.com/v1/badges/58f4d6dbbd5ce58036ec/maintainability)](https://codeclimate.com/github/Celovechek/python-project-50/maintainability)
 
+## Test Coverage Badge codeclimate
+[![Test Coverage](https://api.codeclimate.com/v1/badges/58f4d6dbbd5ce58036ec/test_coverage)](https://codeclimate.com/github/Celovechek/python-project-50/test_coverage)
+
 ## Аскинема с примером работы пакета с файлами .json
 [![asciicast](https://asciinema.org/a/MBh3AdrOC55jdITsVmKpf04kS.svg)](https://asciinema.org/a/MBh3AdrOC55jdITsVmKpf04kS)
