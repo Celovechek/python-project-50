@@ -36,14 +36,18 @@ jobs:
 #          coverageCommand: make test-coverage
 #          debug: true
 #
-      - name: Run tests
-        run: |
-          pip install coverage codeclimate-test-reporter
-          coverage run -m pytest
 
       - name: Report coverage to Code Climate
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
-          coverage xml
-          codeclimate-test-reporter after-build --exit-code $?
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Test and Report coverage
+        run: |
+          poetry run coverage run -m pytest
+          poetry run coverage lcov -o coverage/lcov.info
+      - name: Sending Reporter
+        env:
+          GITHUB_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
+        run: |
+          ./cc-test-reporter after-build -r "$GITHUB_TOKEN" -t lcov
