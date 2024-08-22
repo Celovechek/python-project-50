@@ -1,9 +1,9 @@
-import json
+from .tools import to_dict
 
 
 def generate_diff(f1: str, f2: str) -> str:
-    file1 = json.load(open(f1))
-    file2 = json.load(open(f2))
+    file1 = to_dict(f1)
+    file2 = to_dict(f2)
     file1_keys = sorted(file1.keys())
     file2_keys = sorted(file2.keys())
     river = sorted(set(file1_keys + file2_keys))
