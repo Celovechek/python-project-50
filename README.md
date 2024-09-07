@@ -18,3 +18,6 @@
 
 ## Аскинема с примером работы пакета с deep файлами .json и .yml c форматом вывода plain
 [![asciicast](https://asciinema.org/a/9WgPMEjvQfl7KkWiiyewOeQ69.svg)](https://asciinema.org/a/9WgPMEjvQfl7KkWiiyewOeQ69)
+
+## Аскинема с примером работы пакета с deep файлами .json и .yml c форматом вывода json
+[![asciicast](https://asciinema.org/a/d8pQOS99np9UYs4bjctNTw5AD.svg)](https://asciinema.org/a/d8pQOS99np9UYs4bjctNTw5AD)

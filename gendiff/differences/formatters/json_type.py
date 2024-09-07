@@ -1,6 +1,4 @@
-import json
-
-def json_dumps(obj, indent=None):
+def json_type(diff: dict, indent=4) -> str:
     def wrapper(value, space=0):
         if isinstance(value, dict):
             items = []
@@ -32,8 +30,4 @@ def json_dumps(obj, indent=None):
         else:
             return str(value)
 
-    return wrapper(obj)
-
-def json_type(diff: dict) -> str:
-    '''Converts diff to .json'''
-    return json_dumps(diff, indent=4)
+    return wrapper(diff)
