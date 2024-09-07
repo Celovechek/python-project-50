@@ -1,11 +1,13 @@
 from .tools import to_dict, build_diff
 from .formatters.stylish import stylish
 from .formatters.plain import plain
+from .formatters.json_type import json_type
 
 
 FORMATTERS = {
     'stylish': stylish,
     'plain': plain,
+    'json': json_type
 }
 
 
