@@ -1,20 +1,28 @@
 import pytest
 from gendiff.differences.gendiff import generate_diff
 
-correct_answer = '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
-file1_json_path = 'tests/fixtures/file1.json'
-file2_json_path = 'tests/fixtures/file2.json'
-file1_yaml_path = 'tests/fixtures/file1.yml'
-file2_yaml_path = 'tests/fixtures/file2.yml'
 
-def test_json():
+with_links_path = 'tests/fixtures/correct_answer_flat.txt'
+with open(with_links_path, encoding='utf8') as f:
+    correct_answer = f.read()
+
+@pytest.fixture
+def file1_json_path():
+    return 'tests/fixtures/file1.json'
+
+@pytest.fixture
+def file2_json_path():
+    return 'tests/fixtures/file2.json'
+
+@pytest.fixture
+def file1_yaml_path():
+    return 'tests/fixtures/file1.yml'
+
+@pytest.fixture
+def file2_yaml_path():
+    return 'tests/fixtures/file2.yml'
+
+def test_json(file1_json_path, file2_json_path):
     assert (generate_diff(file1_json_path, file2_json_path)
             == correct_answer)  # normal work
     assert type(generate_diff(file1_json_path, file2_json_path)) == str #string type
@@ -22,7 +30,14 @@ def test_json():
             ': True\n' not in generate_diff(file1_json_path, file2_json_path)) #check true/false styling
 
 
-def test_yaml():
+def test_yaml(file1_yaml_path, file2_yaml_path):
+    assert (generate_diff(file1_yaml_path, file2_yaml_path)
+            == correct_answer)  # normal work
+    assert type(generate_diff(file1_yaml_path, file2_yaml_path)) == str  # string type
+    assert (': False\n' not in generate_diff(file1_yaml_path, file2_yaml_path) or
+            ': True\n' not in generate_diff(file1_yaml_path, file2_yaml_path))  # check true/false styling
+    file1_yaml_path = file1_yaml_path.replace('.yml', '.yaml')
+    file2_yaml_path = file2_yaml_path.replace('.yml', '.yaml')
     assert (generate_diff(file1_yaml_path, file2_yaml_path)
             == correct_answer)  # normal work
     assert type(generate_diff(file1_yaml_path, file2_yaml_path)) == str  # string type

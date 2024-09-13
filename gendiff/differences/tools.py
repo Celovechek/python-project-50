@@ -6,7 +6,7 @@ def to_dict(file_path: str) -> dict:
     '''A function for conversion .json and .yml files in dict format'''
     if file_path[-5:] == '.json':
         return json.load(open(file_path))
-    elif file_path[-4:] == '.yml':
+    elif file_path[-4:] == '.yml' or file_path[-5:] == '.yaml':
         with open(file_path) as fp:
             return yaml.load(fp, Loader=yaml.FullLoader)
 

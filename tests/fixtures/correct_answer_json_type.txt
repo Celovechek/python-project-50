@@ -1,0 +1,125 @@
+{
+    "common": {
+        "type": "include",
+        "children": {
+            "follow": {
+                "type": "added",
+                "value": false
+            },
+            "setting1": {
+                "type": "unchanged",
+                "value": "Value 1"
+            },
+            "setting2": {
+                "type": "removed",
+                "value": 200
+            },
+            "setting3": {
+                "type": "changed not dict to not dict",
+                "old_value": true,
+                "new_value": null
+            },
+            "setting4": {
+                "type": "added",
+                "value": "blah blah"
+            },
+            "setting5": {
+                "type": "added dict",
+                "children": {
+                    "key5": {
+                        "type": "unchanged",
+                        "value": "value5"
+                    }
+                }
+            },
+            "setting6": {
+                "type": "include",
+                "children": {
+                    "doge": {
+                        "type": "include",
+                        "children": {
+                            "wow": {
+                                "type": "changed not dict to not dict",
+                                "old_value": "",
+                                "new_value": "so much"
+                            }
+                        }
+                    },
+                    "key": {
+                        "type": "unchanged",
+                        "value": "value"
+                    },
+                    "ops": {
+                        "type": "added",
+                        "value": "vops"
+                    }
+                }
+            }
+        }
+    },
+    "group1": {
+        "type": "include",
+        "children": {
+            "baz": {
+                "type": "changed not dict to not dict",
+                "old_value": "bas",
+                "new_value": "bars"
+            },
+            "foo": {
+                "type": "unchanged",
+                "value": "bar"
+            },
+            "nest": {
+                "type": "changed dict to not dict",
+                "old_value": {
+                    "key": {
+                        "type": "unchanged",
+                        "value": "value"
+                    }
+                },
+                "new_value": "str"
+            }
+        }
+    },
+    "group2": {
+        "type": "removed dict",
+        "children": {
+            "abc": {
+                "type": "unchanged",
+                "value": 12345
+            },
+            "deep": {
+                "type": "include",
+                "children": {
+                    "id": {
+                        "type": "unchanged",
+                        "value": 45
+                    }
+                }
+            }
+        }
+    },
+    "group3": {
+        "type": "added dict",
+        "children": {
+            "deep": {
+                "type": "include",
+                "children": {
+                    "id": {
+                        "type": "include",
+                        "children": {
+                            "number": {
+                                "type": "unchanged",
+                                "value": 45
+                            }
+                        }
+                    }
+                }
+            },
+            "fee": {
+                "type": "unchanged",
+                "value": 100500
+            }
+        }
+    }
+}
