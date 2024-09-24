@@ -16,7 +16,7 @@ package-install: #установка пакета
 package-reinstall: #переустановка пакета
 	python3 -m pip install --user --force-reinstall dist/*.whl
 
-lint: #провера линтера
+lint: #проверка линтера
 	poetry run flake8 gendiff
 
 gendiff:
