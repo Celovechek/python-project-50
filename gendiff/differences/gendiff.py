@@ -17,3 +17,6 @@ def generate_diff(f1: str, f2: str, formatter='stylish') -> str:
     file2 = to_dict(f2)
     diff = build_diff(file1, file2)
     return FORMATTERS[formatter](diff)
+
+
+__all__ = ['generate_diff']
