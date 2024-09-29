@@ -1,5 +1,4 @@
 import pytest
-from parameterized import parameterized
 from gendiff.differences.gendiff import generate_diff
 
 with_links_path = 'tests/fixtures/correct_answer_deep.txt'
