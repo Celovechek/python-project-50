@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = "First version of project."
+description = "Final (I hope) version of project."
 authors = ["Mikhail Uvarov <celovekvodichka@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/Celovechek/python-project-50/"
