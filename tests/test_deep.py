@@ -1,4 +1,5 @@
 import pytest
+from parameterized import parameterized
 from gendiff.differences.gendiff import generate_diff
 
 with_links_path = 'tests/fixtures/correct_answer_deep.txt'
@@ -26,23 +27,13 @@ def file2_yaml_path():
     return 'tests/fixtures/file2_deep.yml'
 
 
-def test_json(file1_json_path, file2_json_path):
-    assert generate_diff(file1_json_path, file2_json_path) == correct_answer
-    assert isinstance(generate_diff(file1_json_path, file2_json_path), str)
-    assert (': False\n' not in generate_diff(file1_json_path, file2_json_path)
-            or ': True\n' not in generate_diff(file1_json_path, file2_json_path))
-
-
-def test_yaml(file1_yaml_path, file2_yaml_path):
-    assert generate_diff(file1_yaml_path, file2_yaml_path) == correct_answer
-    assert isinstance(generate_diff(file1_yaml_path, file2_yaml_path), str)
-    assert (': False\n' not in generate_diff(file1_yaml_path, file2_yaml_path)
-            or ': True\n' not in generate_diff(file1_yaml_path, file2_yaml_path))
-
-    file1_yaml_path = file1_yaml_path.replace('.yml', '.yaml')
-    file2_yaml_path = file2_yaml_path.replace('.yml', '.yaml')
-
-    assert generate_diff(file1_yaml_path, file2_yaml_path) == correct_answer
-    assert isinstance(generate_diff(file1_yaml_path, file2_yaml_path), str)
-    assert (': False\n' not in generate_diff(file1_yaml_path, file2_yaml_path)
-            or ': True\n' not in generate_diff(file1_yaml_path, file2_yaml_path))
+@pytest.mark.parametrize("file1, file2", [
+    ('tests/fixtures/file1_deep.json', 'tests/fixtures/file2_deep.json'),
+    ('tests/fixtures/file1_deep.yml', 'tests/fixtures/file2_deep.yml'),
+    ('tests/fixtures/file1_deep.yaml', 'tests/fixtures/file2_deep.yaml'),
+])
+def test_generate_diff(file1, file2):
+    result = generate_diff(file1, file2)
+    assert result == correct_answer
+    assert isinstance(result, str)
+    assert (': False\n' not in result or ': True\n' not in result)
