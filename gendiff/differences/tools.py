@@ -15,7 +15,11 @@ def to_dict(file_path: str) -> dict:
 def build_diff(dict1: dict, dict2: dict) -> dict:
     '''Creating of diff dict'''
     diff = {}
-    river = sorted(set(dict1.keys()).union(dict2.keys()))
+    keys_1 = set(dict1.keys())
+    keys_2 = dict2.keys()
+
+    double_keys = keys_1.union(keys_2)
+    river = sorted(double_keys)
     for key in river:
         if key not in dict2 and isinstance(dict1[key], dict):
             diff[key] = {
