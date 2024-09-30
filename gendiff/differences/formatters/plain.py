@@ -11,7 +11,7 @@ def format_value(value):
     return str(value)
 
 
-def plain(diff: dict, path='') -> str:
+def plain(diff: dict, path=None) -> str:
     '''Plain format for diff'''
     lines = []
     for key, value in sorted(diff.items()):
