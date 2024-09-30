@@ -27,22 +27,25 @@ def file2_yaml_path():
 
 
 def test_json(file1_json_path, file2_json_path):
-    assert generate_diff(file1_json_path, file2_json_path) == correct_answer
-    assert isinstance(generate_diff(file1_json_path, file2_json_path), str)
-    assert (': False\n' not in generate_diff(file1_json_path, file2_json_path)
-            or ': True\n' not in generate_diff(file1_json_path, file2_json_path))
+    generator = generate_diff(file1_json_path, file2_json_path)
+    assert generator == correct_answer
+    assert isinstance(generator, str)
+    assert (': False\n' not in generator
+            or ': True\n' not in generator)
 
 
 def test_yaml(file1_yaml_path, file2_yaml_path):
-    assert generate_diff(file1_yaml_path, file2_yaml_path) == correct_answer
-    assert isinstance(generate_diff(file1_yaml_path, file2_yaml_path), str)
-    assert (': False\n' not in generate_diff(file1_yaml_path, file2_yaml_path)
-            or ': True\n' not in generate_diff(file1_yaml_path, file2_yaml_path))
+    generator = generate_diff(file1_yaml_path, file2_yaml_path)
+    assert generator == correct_answer
+    assert isinstance(generator, str)
+    assert (': False\n' not in generator
+            or ': True\n' not in generator)
 
     file1_yaml_path = file1_yaml_path.replace('.yml', '.yaml')
     file2_yaml_path = file2_yaml_path.replace('.yml', '.yaml')
 
-    assert generate_diff(file1_yaml_path, file2_yaml_path) == correct_answer
-    assert isinstance(generate_diff(file1_yaml_path, file2_yaml_path), str)
-    assert (': False\n' not in generate_diff(file1_yaml_path, file2_yaml_path)
-            or ': True\n' not in generate_diff(file1_yaml_path, file2_yaml_path))
+    generator = generate_diff(file1_yaml_path, file2_yaml_path)
+    assert generator == correct_answer
+    assert isinstance(generator, str)
+    assert (': False\n' not in generator
+            or ': True\n' not in generator)

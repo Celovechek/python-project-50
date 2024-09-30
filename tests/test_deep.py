@@ -1,10 +1,9 @@
 import pytest
 from gendiff.differences.gendiff import generate_diff
 
-@pytest.fixture
-def with_links_path():
-    return 'tests/fixtures/correct_answer_deep.txt'
-with open(with_links_path(), encoding='utf8') as f:
+
+with_links_path = 'tests/fixtures/correct_answer_deep.txt'
+with open(with_links_path, encoding='utf8') as f:
     correct_answer = f.read()
 
 
