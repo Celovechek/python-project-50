@@ -1,22 +1,22 @@
-install: #устанавливает зависимости в директорию .venv
+install: #installs dependencies in the directory .venv
 	poetry install
 
-brain-games: #запускает brain_games.py
+brain-games: #launches brain_games.py
 	poetry run brain-games
 
-build: #сборка пакета
+build: #building a package
 	poetry build
 
-publish: #публикация пакета
+publish: #publishing a package
 	poetry publish --dry-run
 
-package-install: #установка пакета
+package-install: #installing the package
 	python3 -m pip install --user dist/*.whl
 
-package-reinstall: #переустановка пакета
+package-reinstall: #reinstalling the package
 	python3 -m pip install --user --force-reinstall dist/*.whl
 
-lint: #проверка линтера
+lint: #checking the linter
 	poetry run flake8 gendiff
 
 gendiff:
