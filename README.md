@@ -12,6 +12,7 @@
 
 ## Информация о запуске проекта
 Проект будет запущен, как только его одобрят
+![working cat](https://github.com/Celovechek/python-project-50/blob/main/images/working%20cat.jpg)
 
 ## Аскинема с примером работы пакета с flat файлами .json
 [![asciicast](https://asciinema.org/a/MBh3AdrOC55jdITsVmKpf04kS.svg)](https://asciinema.org/a/MBh3AdrOC55jdITsVmKpf04kS)
