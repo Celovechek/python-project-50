@@ -32,6 +32,7 @@ def file2_yaml_path():
     ('tests/fixtures/file1_deep.yml', 'tests/fixtures/file2_deep.yml'),
     ('tests/fixtures/file1_deep.yaml', 'tests/fixtures/file2_deep.yaml'),
 ])
+
 def test_generate_diff(file1, file2):
     result = generate_diff(file1, file2)
     assert result == correct_answer
