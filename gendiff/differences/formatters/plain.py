@@ -14,6 +14,7 @@ def format_value(value):
 def plain(diff: dict, path=None) -> str:
     '''Plain format for diff'''
     lines = []
+    update_message = "Property '{0}' was updated. From {1} to {2}"
     for key, value in sorted(diff.items()):
         property_path = f"{path}.{key}" if path else key
         diff_type = value.get('type')
@@ -28,15 +29,15 @@ def plain(diff: dict, path=None) -> str:
         elif diff_type == 'changed dict to not dict':
             old_value = format_value(value['old_value'])
             new_value = format_value(value['new_value'])
-            lines.append(f"Property '{property_path}' was updated. From {old_value} to {new_value}")
+            lines.append(update_message.format(property_path, old_value, new_value))
         elif diff_type == 'changed not dict to dict':
             old_value = format_value(value['old_value'])
             new_value = format_value(value['new_value'])
-            lines.append(f"Property '{property_path}' was updated. From {old_value} to {new_value}")
+            lines.append(update_message.format(property_path, old_value, new_value))
         elif diff_type == 'changed not dict to not dict':
             old_value = format_value(value['old_value'])
             new_value = format_value(value['new_value'])
-            lines.append(f"Property '{property_path}' was updated. From {old_value} to {new_value}")
+            lines.append(update_message.format(property_path, old_value, new_value))
         elif diff_type == 'added dict':
             formatted_value = format_value(value['children'])
             lines.append(f"Property '{property_path}' was added with value: {formatted_value}")
