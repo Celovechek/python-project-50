@@ -1,9 +1,6 @@
 install: #installs dependencies in the directory .venv
 	poetry install
 
-brain-games: #launches brain_games.py
-	poetry run brain-games
-
 build: #building a package
 	poetry build
 
