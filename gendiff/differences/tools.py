@@ -1,25 +1,24 @@
 import json
 import yaml
 
+def open_yaml(file):
+    return yaml.safe_load(file)
 
-def reader(file_path: str) -> tuple:
-    '''Reads the file and returns its content and type'''
-    if file_path.endswith('.json'):
-        with open(file_path, 'r', encoding='utf-8') as file:
-            return file.read(), 'json'
-    elif file_path.endswith(('.yml', '.yaml')):
-        with open(file_path, 'r', encoding='utf-8') as file:
-            return file.read(), 'yaml'
+def open_json(file):
+    return json.loads(file)
 
-
-def to_dict(file_path: str) -> dict:
-    '''A function for conversion .json and .yml files in dict format'''
-    file_content, file_type = reader(file_path)
-    if file_type == 'json':
-        return json.loads(file_content)
-    elif file_type == 'yaml':
-        return yaml.safe_load(file_content)
-
+def to_dict(filepath):
+    extention = filepath.split(".")[-1]
+    func_mapper = dict(
+        yaml=open_yaml,
+        yml=open_yaml,
+        json=open_json,
+    )
+    open_func = func_mapper.get(extention)
+    if not open_func:
+        raise ("Unsupported extention")
+    with open(filepath, 'r', encoding='utf-8') as file:
+        return open_func(file.read())
 
 def build_diff(dict1: dict, dict2: dict) -> dict:
     '''Creating of diff dict'''
