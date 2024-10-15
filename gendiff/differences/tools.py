@@ -1,11 +1,14 @@
 import json
 import yaml
 
+
 def open_yaml(file):
     return yaml.safe_load(file)
 
+
 def open_json(file):
     return json.loads(file)
+
 
 def to_dict(filepath):
     extention = filepath.split(".")[-1]
@@ -19,6 +22,7 @@ def to_dict(filepath):
         raise ("Unsupported extention")
     with open(filepath, 'r', encoding='utf-8') as file:
         return open_func(file.read())
+
 
 def build_diff(dict1: dict, dict2: dict) -> dict:
     '''Creating of diff dict'''
