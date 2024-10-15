@@ -24,6 +24,49 @@ def to_dict(filepath):
         return open_func(file.read())
 
 
+def label(diff: dict, key: str, dict1: dict, dict2: dict) -> dict:
+    if key not in dict2 and isinstance(dict1[key], dict):
+        diff[key] = {
+            'type': 'removed dict',
+            'children': build_diff(dict1[key], dict1[key])
+        }
+    elif key not in dict1 and isinstance(dict2[key], dict):
+        diff[key] = {
+            'type': 'added dict',
+            'children': build_diff(dict2[key], dict2[key])
+        }
+    elif key not in dict2:
+        diff[key] = {'type': 'removed', 'value': dict1[key]}
+    elif key not in dict1:
+        diff[key] = {'type': 'added', 'value': dict2[key]}
+    elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+        diff[key] = {
+            'type': 'include',
+            'children': build_diff(dict1[key], dict2[key])
+        }
+    elif isinstance(dict1[key], dict) and not isinstance(dict2[key], dict):
+        diff[key] = {
+            'type': 'changed dict to not dict',
+            'old_value': build_diff(dict1[key], dict1[key]),
+            'new_value': dict2[key]
+        }
+    elif not isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+        diff[key] = {
+            'type': 'changed not dict to dict',
+            'old_value': dict1[key],
+            'new_value': build_diff(dict2[key], dict2[key])
+        }
+    elif dict1[key] != dict2[key]:
+        diff[key] = {
+            'type': 'changed not dict to not dict',
+            'old_value': dict1[key],
+            'new_value': dict2[key]
+        }
+    else:
+        diff[key] = {'type': 'unchanged', 'value': dict1[key]}
+    return diff
+
+
 def build_diff(dict1: dict, dict2: dict) -> dict:
     '''Creating of diff dict'''
     diff = {}
@@ -33,43 +76,5 @@ def build_diff(dict1: dict, dict2: dict) -> dict:
     double_keys = keys_1.union(keys_2)
     river = sorted(double_keys)
     for key in river:
-        if key not in dict2 and isinstance(dict1[key], dict):
-            diff[key] = {
-                'type': 'removed dict',
-                'children': build_diff(dict1[key], dict1[key])
-            }
-        elif key not in dict1 and isinstance(dict2[key], dict):
-            diff[key] = {
-                'type': 'added dict',
-                'children': build_diff(dict2[key], dict2[key])
-            }
-        elif key not in dict2:
-            diff[key] = {'type': 'removed', 'value': dict1[key]}
-        elif key not in dict1:
-            diff[key] = {'type': 'added', 'value': dict2[key]}
-        elif isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
-            diff[key] = {
-                'type': 'include',
-                'children': build_diff(dict1[key], dict2[key])
-            }
-        elif isinstance(dict1[key], dict) and not isinstance(dict2[key], dict):
-            diff[key] = {
-                'type': 'changed dict to not dict',
-                'old_value': build_diff(dict1[key], dict1[key]),
-                'new_value': dict2[key]
-            }
-        elif not isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
-            diff[key] = {
-                'type': 'changed not dict to dict',
-                'old_value': dict1[key],
-                'new_value': build_diff(dict2[key], dict2[key])
-            }
-        elif dict1[key] != dict2[key]:
-            diff[key] = {
-                'type': 'changed not dict to not dict',
-                'old_value': dict1[key],
-                'new_value': dict2[key]
-            }
-        else:
-            diff[key] = {'type': 'unchanged', 'value': dict1[key]}
+        diff = label(diff, key, dict1, dict2)
     return diff
