@@ -6,6 +6,7 @@ from gendiff.differences.gendiff import generate_diff
 def correct_answer_plain_path():
     return 'tests/fixtures/correct_answer_deep.txt'
 
+
 @pytest.fixture
 def correct_answer(correct_answer_plain_path):
     with open(correct_answer_plain_path) as file:
