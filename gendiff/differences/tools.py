@@ -19,7 +19,7 @@ def to_dict(filepath):
     )
     open_func = func_mapper.get(extention)
     if not open_func:
-        raise ("Unsupported extention")
+        raise ValueError("Unsupported extention")
     with open(filepath, 'r', encoding='utf-8') as file:
         return open_func(file.read())
 
