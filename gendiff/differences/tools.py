@@ -10,7 +10,7 @@ def open_json(file):
     return json.loads(file)
 
 
-def to_dict(filepath):
+def convert_to_dict(filepath):
     extention = filepath.split(".")[-1]
     func_mapper = dict(
         yaml=open_yaml,
@@ -24,7 +24,7 @@ def to_dict(filepath):
         return open_func(file.read())
 
 
-def label(diff: dict, key: str, dict1: dict, dict2: dict) -> dict:
+def marker(diff: dict, key: str, dict1: dict, dict2: dict) -> dict:
     if key not in dict2 and isinstance(dict1[key], dict):
         diff[key] = {
             'type': 'removed dict',
@@ -76,5 +76,5 @@ def build_diff(dict1: dict, dict2: dict) -> dict:
     double_keys = keys_1.union(keys_2)
     river = sorted(double_keys)
     for key in river:
-        diff = label(diff, key, dict1, dict2)
+        diff = marker(diff, key, dict1, dict2)
     return diff
